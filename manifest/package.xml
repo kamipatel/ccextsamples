@@ -9,5 +9,10 @@
         <members>*</members>
         <name>LightningComponentBundle</name>
     </types>
-   <version>56.0</version>
+    <types>
+        <members>*</members>
+        <name>CustomLabels</name>
+    </types>
+
+   <version>59.0</version>
 </Package>

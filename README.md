@@ -1,12 +1,21 @@
 sfdc commands
 ====================
-export SFDX_NPM_REGISTRY=
+export SF_NPM_REGISTRY=
+sudo sfdx update
 sfdx config:set org-api-version=58.0
 
-kamlesh.patel-6rey@force.com
+# Authenticate to devhub org and assign alias
+# kamlesh.patel-6rey@force.com
+sfdx org login web -d -a "mydevhub"
+
+sfdx commerce:scratchorg:create -u evstore1@app.demo -a "demoapp" -v kamlesh.patel-6rey@force.com -w 30 --json
+
+sfdx org open --target-org evstore1@app.demo
+
+sfdx commerce:store:create -n ev1 -o b2c -b john@johndoe.edu -u evstore1@app.demo -v kamlesh.patel-6rey@force.com
 
 
-## Register extenstions
+## Register extensions
 =======================
 # List
 Commerce_Domain_Cart_Summary
@@ -29,7 +38,9 @@ sfdx force:data:record:create -s PaymentGatewayProvider -v "ApexAdapterID=01pB00
 sfdx commerce:extension:points:list -u kamlesh.patel-6rey@force.com
 
 # Register
-sfdx commerce:extension:register -u kamlesh.patel-6rey@force.com -e Commerce_Domain_Pricing_Service -a PricingServiceSample -r PricingServiceSample
+sfdx commerce:extension:register -u kamlesh.patel-6rey@force.com -e Commerce_Domain_Pricing_Service -a PricingDemoService -r PricingDemoService
+
+sfdx commerce:extension:register -u kamlesh.patel-6rey@force.com -e Commerce_Domain_Promotions_CartCalculator -a PromoDemoCalculator -r PromoDemoCalculator
 
 sfdx commerce:extension:register -u kamlesh.patel-6rey@force.com -e Commerce_Domain_Inventory_Service -a CommerceInvServiceSample -r KamInventoryService
 
@@ -38,7 +49,9 @@ sfdx commerce:extension:register -u kamlesh.patel-6rey@force.com -e Commerce_Dom
 
 # Map 
 sfdx commerce:extension:map -u kamlesh.patel-6rey@force.com --registered-extension-name KamInventoryService -n ev1
-sfdx commerce:extension:map -u kamlesh.patel-6rey@force.com --registered-extension-name KamInventoryCalculator -n ev1
+
+sfdx commerce:extension:map -u kamlesh.patel-6rey@force.com --registered-extension-name PricingDemoService -n ev1
+
 sfdx commerce:extension:map -u kamlesh.patel-6rey@force.com --registered-extension-name PricingServiceSample -n ev1
 
 
