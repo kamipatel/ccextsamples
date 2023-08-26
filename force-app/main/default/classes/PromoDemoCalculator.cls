@@ -69,7 +69,7 @@ public with sharing class PromoDemoCalculator extends CartExtension.PromotionsCa
         // apply flat 5% discount across all cart items
         Iterator<CartExtension.CartItem> ciIter = cart.getCartItems().iterator();
     
-        Decimal pctDiscount = -5;
+        Decimal pctDiscount = -20;
     
         for ( Integer i = 0; i < cartsize; i++) {
     
@@ -91,7 +91,7 @@ public with sharing class PromoDemoCalculator extends CartExtension.PromotionsCa
             ,DUMMY_PROMOTION_ID); // PriceAdjustmentCauseId
         
             // Order of how adjustments are applied 
-            cia.setPriority(1);
+            //cia.setPriority(1);
             cia.setAdjustmentAmountScope(CartExtension.AdjustmentAmountScopeEnum.TOTAL);
             cia.setDescription('PromoDemoCartCalculator');
         
@@ -102,31 +102,7 @@ public with sharing class PromoDemoCalculator extends CartExtension.PromotionsCa
                System.debug('In promo calculate applyAdjustments done');
     
           }
-    /*
-        while(ciIter.hasNext()) {
-    
-                    CartExtension.CartItem ci = ciIter.next();
-            
-                    Decimal promotionAdjustment = (ci.getSalesPrice() * (pctDiscount/100) * ci.getQuantity());
-            
-                    promotionAdjustment = promotionAdjustment.setScale(2,System.RoundingMode.HALF_DOWN); // currency precision & rounding
-            
-                    CartExtension.CartItemPriceAdjustment cia = new CartExtension.CartItemPriceAdjustment(CartExtension.CartAdjustmentTargetTypeEnum.ITEM // AdjustmentTargetType
-                    ,promotionAdjustment // TotalAmount
-                    ,CartExtension.PriceAdjustmentSourceEnum.PROMOTION // AdjustmentSource
-                    ,CartExtension.AdjustmentTypeEnum.ADJUSTMENT_PERCENTAGE // AdjustmentType
-                    ,pctDiscount // AdjustmentValue
-                    ,DUMMY_PROMOTION_ID); // PriceAdjustmentCauseId
-            
-                    // Order of how adjustments are applied 
-                    cia.setPriority(1);
-                    cia.setAdjustmentAmountScope(CartExtension.AdjustmentAmountScopeEnum.TOTAL);
-                    cia.setDescription('PromoDemoCartCalculator');
-            
-                    ci.getCartItemPriceAdjustments().add(cia);
-                    
-                }            
-    */            
+
         }
         catch(Exception e){
             System.debug('In promo calculate applyAdjustments exception=' + e.getMessage());
