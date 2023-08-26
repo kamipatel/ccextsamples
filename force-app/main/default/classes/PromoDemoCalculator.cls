@@ -2,8 +2,8 @@ public with sharing class PromoDemoCalculator extends CartExtension.PromotionsCa
 
 public static final String DUMMY_PROMOTION_ID = '01tB0000003ojZkIAI'; // CHANGEME
 
-/*
-public override void calculate(CartExtension.CartCalculationRequest request) {
+
+public virtual override void calculate(CartExtension.CartCalculateCalculatorRequest request) {
     CartExtension.Cart cart = request.getCart();
     resetAllAdjustments(cart);
     applyAdjustments(cart);
@@ -27,14 +27,14 @@ public static void resetAllAdjustments(CartExtension.Cart cart) {
     Iterator<CartExtension.CartItem> ciIter = cart.getCartItems().iterator();
     while(ciIter.hasNext()) {
         CartExtension.CartItem ci = ciIter.next(); // for every cart item, cursor through adjustments
-        Iterator<CartExtension.CartItemAdjustment> ciaIter = ci.getCartItemAdjustments().iterator();
-        List<CartExtension.CartItemAdjustment> ciaToRemove= new List<CartExtension.CartItemAdjustment>();
-        while(ciaIter.hasNext()) { // for every adjustment, look for a matching external adjustment
-            ciaToRemove.add(ciaIter.next());
+        CartExtension.CartItemPriceAdjustmentList ciaIter = ci.getCartItemPriceAdjustments();
+        List<CartExtension.CartItemPriceAdjustment> ciaToRemove= new List<CartExtension.CartItemPriceAdjustment>();
+        while(ciaIter.iterator().hasNext()) { // for every adjustment, look for a matching external adjustment
+            ciaToRemove.add(ciaIter.iterator().next());
         }
 
-        for(CartExtension.CartItemAdjustment cia : ciaToRemove) {
-            ci.getCartItemAdjustments().remove(cia);
+        for(CartExtension.CartItemPriceAdjustment cia : ciaToRemove) {
+            ci.getCartItemPriceAdjustments().remove(cia);
         }
     }
 
@@ -68,7 +68,7 @@ public static void applyAdjustments(CartExtension.Cart cart) {
 
         promotionAdjustment = promotionAdjustment.setScale(2,System.RoundingMode.HALF_DOWN); // currency precision & rounding
 
-        CartExtension.CartItemAdjustment cia = new CartExtension.CartItemAdjustment(CartExtension.CartAdjustmentTargetTypeEnum.ITEM // AdjustmentTargetType
+        CartExtension.CartItemPriceAdjustment cia = new CartExtension.CartItemPriceAdjustment(CartExtension.CartAdjustmentTargetTypeEnum.ITEM // AdjustmentTargetType
         ,promotionAdjustment // TotalAmount
         ,CartExtension.PriceAdjustmentSourceEnum.PROMOTION // AdjustmentSource
         ,CartExtension.AdjustmentTypeEnum.ADJUSTMENT_PERCENTAGE // AdjustmentType
@@ -76,12 +76,12 @@ public static void applyAdjustments(CartExtension.Cart cart) {
         ,DUMMY_PROMOTION_ID); // PriceAdjustmentCauseId
 
         // Order of how adjustments are applied 
-        cia.setPriority('1');
+        cia.setPriority(1);
         cia.setAdjustmentAmountScope(CartExtension.AdjustmentAmountScopeEnum.TOTAL);
         cia.setDescription('PromoDemoCartCalculator');
 
-        ci.getCartItemAdjustments().add(cia);
+        ci.getCartItemPriceAdjustments().add(cia);
     }
 }
-*/
+
 }

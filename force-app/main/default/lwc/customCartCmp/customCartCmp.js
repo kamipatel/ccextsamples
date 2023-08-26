@@ -1,4 +1,4 @@
-import { LightningElement, api, wire} from 'lwc';
+import { LightningElement, api, wire, track} from 'lwc';
 import { CurrentPageReference } from 'lightning/navigation';
 
 /**

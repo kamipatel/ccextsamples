@@ -1,5 +1,11 @@
 <template>
     ***Custom Cart***
-    CartId: {cartId}
+    <template lwc:if={cartId}>
+        CartId: {cartId}
+        <p></p>
+        Total: {cartTotal}
+        <p></p>
+        <lightning-button variant="base" label="Redirect to SupplierSolutions" title="Redirect to SupplierSolutions" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>        
+    </template>
 
 </template>
