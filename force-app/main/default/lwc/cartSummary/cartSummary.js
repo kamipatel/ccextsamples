@@ -28,10 +28,13 @@ export default class CartSummary extends LightningElement {
     
     handleClick(event) {
         console.debug('handleClick called this.cartId=' + this.cartId);
-        var status = 'Closed';
-        updateCart(this.cartId, status)
+        var newstatus = 'Closed';
+        
+        updateCart({cartId:this.cartId, status:newstatus})
         .then(result =>{
-            console.debug('updateCart success');;
+            console.debug('updateCart3.1 success');
+            console.debug('updateCart3.1 success, result=' + result);
+            
         })
         .catch(error =>{
             this.errorMsg = error;
