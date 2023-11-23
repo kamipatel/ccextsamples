@@ -1,14 +1,16 @@
 
-https://dog000000h4cl2as.test1.lightning.pc-rnd.force.com/lightning/page/home
-https://dog000000h4cl2as.test1.my.pc-rnd.salesforce.com:9443/qa/hoseMyOrgPlease.jsp
 
+sfdx org login web -d -a "mydevhub"
+sf config set target-dev-hub=dev1@kam.cc1
 
+## Create scratch org with commerce features
+sfdx commerce:scratchorg:create -u mystore1@app.demo -a "demoapp" -v dev1@kam.cc1 -w 30 --json
 
-/Users/kamlesh.patel/.ssh/id_ed25519.pub
+## Open the scartch org
+sfdx org open --target-org demoapp
 
-ssh-keygen -t ed25519 -C "kamlesh.patel@salesforce.com"
+## Create a commerce storefront with products, cms etc
+sfdx commerce:store:create -n ev1 -o b2c -b john@johndoe.edu -u mystore1@app.demo -v dev1@kam.cc1
 
-git clone git@git.soma.salesforce.com:Infrastructure-Security/dynamic-keytool.git
-
-
-churngroup
+## push the source
+sfdx force:source:push -o "demoapp"
