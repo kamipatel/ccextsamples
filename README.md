@@ -14,3 +14,4 @@ sfdx commerce:store:create -n ev1 -o b2c -b john@johndoe.edu -u mystore1@app.dem
 
 ## push the source
 sfdx force:source:push -o "demoapp"
+

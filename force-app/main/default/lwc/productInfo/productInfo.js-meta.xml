@@ -10,7 +10,8 @@
     <targetConfigs>
         <targetConfig targets="lightningCommunity__Default">
             <property label="Product Id" name="productId" type="String" default="{!Product.Details.id}"/>
-            <property label="Product Code" name="productCode" type="String" default="{!Product.Details.fields.ProductCode}"/>        
+            <property label="Product Code" name="productCode" type="String" default="{!Product.Details.fields.ProductCode}"/>            
+            <property label="Product Details" name="productDetails" type="String" default="{!Product.Details}"/>                    
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
