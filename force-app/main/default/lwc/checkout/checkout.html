@@ -1,0 +1,8 @@
+<template>
+    ***Custom Checkout***
+    <template lwc:if={cartId}>
+        CartId: {cartId}
+        <p></p>
+        <lightning-button variant="base" label="Custom Checkout" title="Custom Checkout" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>        
+    </template>
+</template>
