@@ -1,6 +1,6 @@
 import { LightningElement, wire, api, track } from 'lwc';
 
-import { CartItemsAdapter, CartSummaryAdapter  } from 'commerce/cartApi';
+import { CartItemsAdapter, CartSummaryAdapter} from 'commerce/cartApi';
 import updateCart from '@salesforce/apex/StoreWrapperApi.updateCart';
 
 export default class CartSummary extends LightningElement {
@@ -26,6 +26,14 @@ export default class CartSummary extends LightningElement {
         }
     }
     
+    @wire(CartItemsAdapter)
+    cartItemsHandler(response) {
+        console.debug('wireCartItemsAdapter called');
+        if (response.data) {
+            console.debug('cartItemsHandler=' + JSON.stringify(response.data));
+        }
+    }
+
     handleClick(event) {
         console.debug('handleClick called this.cartId=' + this.cartId);
         var newstatus = 'Closed';
